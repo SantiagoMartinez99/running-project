@@ -1,13 +1,14 @@
-type StreetRaceBoxProps = {
+type RaceBoxProps = {
   color: string;
+  type : string
 };
 
-function StreetRaceBox({ color }: StreetRaceBoxProps) {
+function RaceBox({ color,type }: RaceBoxProps) {
   return (
-    <article className={`flex bg-${color} flex-col rounded-md lg:w-3/12 pb-24 mx-12`}>
+    <article className={`flex bg-${color} flex-col rounded-md lg:w-3/12 pb-24 mx-12 mb-3`}>
       <div>
         <div className="flex w-full border-white border-b-2 my-8 justify-center">
-          <h1 className="text-5xl text-white font-bold">CALLE</h1>
+          <h1 className="text-5xl text-white font-bold uppercase">{type}</h1>
         </div>
         <div className="flex flex-col w-full my-4 gap-3 items-center p-5">
           <p className="text-2xl text-white font-bold">MAYO 05</p>
@@ -17,7 +18,7 @@ function StreetRaceBox({ color }: StreetRaceBoxProps) {
           <p className="text-2xl text-white font-bold text-center"> 6K,12K,18K
           </p>
         </div>
-        <p className="text-2xl text-white font-bold underline text-center pt-5 px-5">
+        <p className="text-2xl text-white font-bold underline text-center pt-5 px-5" >
           ¡INSCRIBETE YA!
         </p>
       </div>
@@ -25,4 +26,4 @@ function StreetRaceBox({ color }: StreetRaceBoxProps) {
   );
 }
 
-export default StreetRaceBox;
+export default RaceBox;
