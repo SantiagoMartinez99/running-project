@@ -58,6 +58,7 @@ function Header() {
           </div>
           <a className="btn btn-ghost text-xl">
             <img className="h-14" src={LogoCoRunning} alt="logo" />
+            <p className="-translate-x-6 translate-y-2 italic">beta</p>
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

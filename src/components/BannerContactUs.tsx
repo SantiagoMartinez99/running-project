@@ -9,7 +9,7 @@ function BannerContactUs() {
 
       <div className="flex w-full lg:justify-end px-14 mt-20">
         <span>
-          <h1 className=" text-6xl md:text-8xl font-bold text-accent italic">
+          <h1 className=" text-5xl md:text-8xl font-bold text-accent italic mt-10">
             CONTACTANOS
           </h1>
           <span className="w-full h-1 bg-primary flex md:-translate-y-3"></span>

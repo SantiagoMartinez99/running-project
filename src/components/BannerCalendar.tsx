@@ -1,11 +1,11 @@
-import BannerCalendarSvg from "../assets/banners/BannerCalendar.png";
+import BannerCalendarSvg from "../assets/banners/BannerCalendar2.png";
 import RaceBox from "./RaceBox";
 
 function BannerCalendar() {
   return (
     <>
       <div
-        className="flex-col bg-cover bg-no-repeat mt-20 items-center"
+        className="flex-col bg-cover bg-no-repeat mt-20 py-10 items-center"
         style={{
           backgroundImage: `url(${BannerCalendarSvg})`,
         }}
@@ -24,15 +24,15 @@ function BannerCalendar() {
         <div className="flex w-full my-24 justify-center">
           <div className="lg:flex justify-around">
             <RaceBox color={"secondary"} type={"calle"} />
-            <RaceBox color={"accent"} type={"trail"}/>
-            <RaceBox color={"neutral"} type={"triatlón"}/>
+            <RaceBox color={"accent"} type={"trail"} />
+            <RaceBox color={"neutral"} type={"triatlón"} />
           </div>
         </div>
-        <div className="flex justify-center">
-          <button className="btn btn-neutral italic text-white mb-20 -translate-y-6">
-            VER TODAS LAS CARRERAS
-          </button>
-        </div>
+      </div>
+      <div className="flex justify-center">
+        <button className="btn btn-neutral italic text-white  -translate-y-6">
+          VER TODAS LAS CARRERAS
+        </button>
       </div>
     </>
   );

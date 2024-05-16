@@ -4,7 +4,7 @@ function BannerAdvertisement() {
   return (
     <>
       <div
-        className="flex bg-cover bg-no-repeat py-32 items-center mb-10"
+        className="flex bg-cover bg-no-repeat py-32 xl:py-48 items-center mb-10"
         style={{
           backgroundImage: `url(${BannerSvg})`,
         }}
