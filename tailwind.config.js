@@ -16,4 +16,11 @@ module.exports = {
       "light",
     ],
   },
+  theme: {
+    extend: {
+      gridTemplateColumns: {
+        teamInfo: "200px 1fr",
+      },
+    },
+  },
 };

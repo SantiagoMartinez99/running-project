@@ -53,10 +53,10 @@ function Header() {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">
+          <Link to="/" className="btn btn-ghost text-xl">
             <img className="h-14" src={LogoCoRunning} alt="logo" />
             <p className="-translate-x-6 translate-y-2 italic">beta</p>
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-secondary italic uppercase justify-around gap-10">

@@ -1,4 +1,3 @@
-
 type CalendarBoxProps = {
   title: string;
   color: string;
@@ -61,7 +60,7 @@ function CalendarBox({ title, color, orientation }: CalendarBoxProps) {
           {title}
         </h1>
         <div className="bg-white px-10 py-2">
-          <div className={`grid grid-cols-6 underline`}>
+          <div className={`grid grid-cols-6 underline font-bold text-xl`}>
             <div>MES</div>
             <div>DIA</div>
             <div>CARRERA</div>
