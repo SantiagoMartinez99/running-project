@@ -30,7 +30,7 @@ function BannerCalendar() {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="btn btn-neutral italic text-white  -translate-y-6">
+        <button className="bg-neutral italic text-white text-center -translate-y-10 text-lg p-5 rounded-lg">
           VER TODAS LAS CARRERAS
         </button>
       </div>

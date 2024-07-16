@@ -1,18 +1,19 @@
-import Header from "../src/components/Header.tsx";
-import BannerAdvertisement from "./components/BannerAdvertisement.tsx";
-import BannerCalendar from "./components/BannerCalendar.tsx";
-import BannerContactUs from "./components/BannerContactUs.tsx";
-import BannerFaq from "./components/BannerFaq.tsx";
-import Footer from "./components/Footer.tsx";
+import Calendar from "./pages/Calendar";
+import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Teams from "./pages/Teams";
+import Tracks from "./pages/Tracks";
 function App() {
   return (
     <>
-      <Header />
-      <BannerAdvertisement />
-      <BannerCalendar />
-      <BannerFaq />
-      <BannerContactUs />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/calendar" element={<Calendar />}></Route>
+          <Route path="/tracks" element={<Tracks />}></Route>
+          <Route path="/teams" element={<Teams />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
