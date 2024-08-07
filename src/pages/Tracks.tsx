@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MapComponent from "../components/MapComponent";
 
@@ -17,7 +18,7 @@ function Tracks() {
     <>
       {" "}
       <Header />
-      <div className="max-h-screen flex flex-col">
+      <div>
         <div className="mx-14 py-10">
           <h1 className="text-5xl md:text-8xl font-bold text-secondary italic">
             PISTAS
@@ -25,7 +26,7 @@ function Tracks() {
           <span className="h-1 bg-accent flex"></span>
         </div>
 
-        <div className="flex flex-grow gap-10 mx-14 my-10">
+        <div className="grid grid-flow-col gap-4">
           <div className="flex flex-col bg-primary text-white rounded-tr-xl overflow-scroll flex-grow">
             <h1 className="border-b-2 border-white text-center p-5">
               PISTAS EN BOGOTA
@@ -44,11 +45,12 @@ function Tracks() {
             </div>
           </div>
 
-          <div className="bg-accent text-white text-center p-5 rounded-md flex-grow flex items-center justify-center">
+          <div className="bg-accent text-white text-center p-5 rounded-md flex-grow flex  justify-center">
             <MapComponent />
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

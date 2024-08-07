@@ -2,10 +2,18 @@ import {
   GoogleMap,
   useLoadScript,
   MarkerF,
-  InfoWindow,
   InfoWindowF,
 } from "@react-google-maps/api";
-import { useState } from "react";
+
+interface Marker {
+  id: number;
+  position: {
+    lat: number;
+    lng: number;
+  };
+}
+
+import { SetStateAction, useState } from "react";
 const markers = [
   {
     id: 1,
@@ -31,11 +39,13 @@ export default function MapComponent() {
 
   const [activeMarker, setActiveMarker] = useState(null);
 
-  const handleActiveMarker = (marker: any) => {
-    if (marker == activeMarker) {
-      return;
-    }
-    setActiveMarker(marker);
+  const handleActiveMarker = (marker: Marker) => {
+    setActiveMarker((prevMarker) => {
+      if (marker.id === prevMarker) {
+        return null;
+      }
+      return null; 
+    });
   };
 
   return (
