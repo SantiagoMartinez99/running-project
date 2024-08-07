@@ -13,7 +13,7 @@ interface Marker {
   };
 }
 
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 const markers = [
   {
     id: 1,
@@ -44,7 +44,7 @@ export default function MapComponent() {
       if (marker.id === prevMarker) {
         return null;
       }
-      return null; 
+      return null;
     });
   };
 
@@ -57,15 +57,15 @@ export default function MapComponent() {
           onClick={() => setActiveMarker(null)}
           mapContainerStyle={{ width: "100%", height: "100%" }}
         >
-          {markers.map(({ id, name, position }) => (
+          {markers.map((marker) => (
             <MarkerF
-              key={id}
-              position={position}
-              onClick={() => handleActiveMarker(id)}
+              key={marker.id}
+              position={marker.position}
+              onClick={() => handleActiveMarker(marker)}
             >
-              {activeMarker === id ? (
+              {activeMarker === marker.id ? (
                 <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                  <div className="text-black">{name}</div>
+                  <div className="text-black">{marker.name}</div>
                 </InfoWindowF>
               ) : null}
             </MarkerF>
