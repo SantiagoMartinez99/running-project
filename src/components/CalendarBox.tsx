@@ -1,6 +1,6 @@
-import { db } from "../firebase";
-import { collection, getDocs, addDoc, query, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { db } from "../firebase";
 
 type CalendarBoxProps = {
   title: string;
@@ -84,9 +84,10 @@ function CalendarBox({ title, color, orientation }: CalendarBoxProps) {
         >
           {title}
         </h1>
-        <div className="bg-white px-10 py-2">
+
+        <div className="bg-white py-2 ">
           <div className={`grid grid-cols-6 underline font-bold text-xl`}>
-            <div className="truncate">MES</div>
+            <div className="truncate pl-10">MES</div>
             <div className="truncate">DIA</div>
             <div className="truncate">CARRERA</div>
             <div className="truncate">LUGAR</div>
@@ -94,7 +95,7 @@ function CalendarBox({ title, color, orientation }: CalendarBoxProps) {
             <div className="truncate">LINK</div>
           </div>
         </div>
-        <div className="h-96 overflow-auto bg-white py-2 space-y-2 px-10">
+        <div className=" h-96 overflow-auto bg-white py-2 space-y-2 ">
           {events
             .filter(
               (event) =>
@@ -104,21 +105,23 @@ function CalendarBox({ title, color, orientation }: CalendarBoxProps) {
             .map((race, index) => (
               <div
                 key={index}
-                className="grid grid-cols-6 uppercase  bg-white py-2 font-bold italic text-xl"
+                className={`grid grid-cols-6 uppercase py-2 font-bold italic text-xl  ${
+                  index % 2 !== 0 ? "bg-white" : "bg-gray-200"
+                }`}
               >
-                <p className="truncate px-2">{race.DAY}</p>
-                <p className="truncate px-2">{race.MONTH}</p>
-                <p className="truncate px-2">{race.NAME}</p>
-                <p className="truncate px-2">{race.PLACE}</p>
-                <p className="truncate px-2">{race.DISTANCE}</p>
-                <p className="truncate px-2">
+                <p className="truncate pl-10 ">{race.MONTH}</p>
+                <p className="truncate ">{race.DAY}</p>
+                <p className="truncate pr-10">{race.NAME}</p>
+                <p className="truncate pr-10">{race.PLACE}</p>
+                <p className="truncate pr-10">{race.DISTANCE}</p>
+                <p className="truncate pr-10">
                   <a
                     href={race.LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`truncate text-${color} underline`}
+                    className={`text-${color} truncate underline`}
                   >
-                    Link
+                    {race.LINK}
                   </a>
                 </p>
               </div>
