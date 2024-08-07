@@ -28,7 +28,7 @@ function Calendar() {
       </div>
       <CalendarBox title={"CALLE"} color={"neutral"} orientation={"left"} />
       <CalendarBox title={"TRAIL"} color={"primary"} orientation={"right"} />
-      <CalendarBox title={"TRIATLÓN"} color={"accent"} orientation={"left"} />
+      {/* <CalendarBox title={"TRIATLÓN"} color={"accent"} orientation={"left"} /> */}
       <Footer />
     </>
   );
