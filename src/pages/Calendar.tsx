@@ -2,11 +2,77 @@ import CalendarBox from "../components/CalendarBox";
 import Header from "../components/Header";
 // import RouteMapImg from "../assets/calendar/routeMap.svg";
 import Footer from "../components/Footer";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { getMonth } from "../utils/globalFunctions";
+
+type Event = {
+  id?: string;
+  DAY: number;
+  DISTANCE: string;
+  LINK: string;
+  MONTH: string;
+  NAME: string;
+  PLACE: string;
+  RACETYPE: string;
+};
 
 function Calendar() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
+  const currentMonth: string = getMonth();
+  const [filters, setFilters] = useState({
+    month: "",
+    distance: "",
+  });
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
+
+  const handleClearFilters = () => {
+    setFilters({
+      month: currentMonth,
+      distance: "",
+    });
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const querySnapshot = await getDocs(collection(db, "Races"));
+      const eventsArray = querySnapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as Event)
+      );
+      eventsArray.sort((a, b) => a.DAY - b.DAY);
+      setEvents(eventsArray);
+    };
+    fetchEvents();
+    console.log(events);
+  }, []);
+
+  useEffect(() => {
+    const filtered = events.filter((event) => {
+      const monthMatch = filters.month
+        ? event.MONTH.toLocaleUpperCase() === filters.month
+        : true;
+      const distanceMatch = filters.distance
+        ? event.DISTANCE === filters.distance
+        : true;
+      return monthMatch && distanceMatch;
+    });
+    setFilteredEvents(filtered);
+    console.log(filteredEvents);
+  }, [events, filters]);
+
   return (
     <>
       <Header />
+
       <div className="flex flex-col w-full pl-14 my-10 justify-between gap-5">
         <h1>
           <span className=" text-5xl md:text-8xl font-bold text-secondary italic">
@@ -28,34 +94,49 @@ function Calendar() {
         <div className="display flex gap-10">
           <p className="text-primary italic text-2xl pr-5"> Filtrar por:</p>
 
-          <select className="w-48">
-            <option disabled selected>
+          <select
+            name="month"
+            onChange={handleFilterChange}
+            value={filters.month}
+            className="w-48"
+          >
+            <option hidden value="">
               Mes
             </option>
-            <option value="Enero">Enero</option>
-            <option value="Febrero">Febrero</option>
-            <option value="Marzo">Marzo</option>
-            <option value="Abril">Abril</option>
-            <option value="Mayo">Mayo</option>
-            <option value="Junio">Junio</option>
-            <option value="Julio">Julio</option>
-            <option value="Agosto">Agosto</option>
-            <option value="Septiembre">Septiembre</option>
-            <option value="Octubre">Octubre</option>
-            <option value="Noviembre">Noviembre</option>
-            <option value="Diciembre">Diciembre</option>
+            <option value="ENERO">Enero</option>
+            <option value="FEBRERO">Febrero</option>
+            <option value="MARZO">Marzo</option>
+            <option value="ABRIL">Abril</option>
+            <option value="MAYO">Mayo</option>
+            <option value="JUNIO">Junio</option>
+            <option value="JULIO">Julio</option>
+            <option value="AGOSTO">Agosto</option>
+            <option value="SEPTIEMBRE">Septiembre</option>
+            <option value="OCTUBRE">Octubre</option>
+            <option value="NOVIEMBRE">Noviembre</option>
+            <option value="DICIEMBRE">Diciembre</option>
           </select>
 
-          <select className="w-48">
+          {/* <select
+            name="raceType"
+            value={filters.raceType}
+            onChange={handleFilterChange}
+            className="w-48"
+          >
             <option disabled selected>
               Tipo de Carrera
             </option>
             <option value="calle">Calle</option>
             <option value="trail">Trail</option>
-          </select>
+          </select> */}
 
-          <select className="w-48">
-            <option disabled selected>
+          <select
+            name="distance"
+            value={filters.distance}
+            onChange={handleFilterChange}
+            className="w-48"
+          >
+            <option hidden value="">
               Distancia
             </option>
             <option value="5K">5K</option>
@@ -66,12 +147,28 @@ function Calendar() {
           </select>
         </div>
         <div>
-          <p className="underline text-xl font-bold ">Limpiar filtros</p>
+          <p
+            className="underline text-xl font-bold hover:cursor-pointer"
+            onClick={handleClearFilters}
+          >
+            Limpiar filtros
+          </p>
+          <p>{filters.month}</p>
         </div>
       </div>
 
-      <CalendarBox title={"CALLE"} color={"neutral"} orientation={"left"} />
-      <CalendarBox title={"TRAIL"} color={"primary"} orientation={"right"} />
+      <CalendarBox
+        title={"CALLE"}
+        color={"neutral"}
+        orientation={"left"}
+        filteredEvents={filteredEvents}
+      />
+      <CalendarBox
+        title={"TRAIL"}
+        color={"primary"}
+        orientation={"right"}
+        filteredEvents={filteredEvents}
+      />
       {/* <CalendarBox title={"TRIATLÓN"} color={"accent"} orientation={"left"} /> */}
       <Footer />
     </>
