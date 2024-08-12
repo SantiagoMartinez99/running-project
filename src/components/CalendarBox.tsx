@@ -1,4 +1,4 @@
-import { getMonth } from "../utils/globalFunctions";
+// import { getMonth } from "../utils/globalFunctions";
 
 type CalendarBoxProps = {
   title: string;
@@ -28,9 +28,11 @@ function CalendarBox({
   orientation,
   filteredEvents,
 }: CalendarBoxProps) {
-  const currentMonth: string = getMonth();
+  // const currentMonth: string = getMonth();
   const justifyContent =
     orientation === "left" ? "justify-start" : "justify-end";
+
+  //===================CODIGO PARA INSERTAR CARRERAS=========================================================
 
   // const [events, setEvents] = useState<Event[]>([]);
 
@@ -77,8 +79,7 @@ function CalendarBox({
   // }, []);
 
   const displayedEvents = filteredEvents.filter(
-    (event) =>
-      event.RACETYPE.toUpperCase() === title.toUpperCase()
+    (event) => event.RACETYPE.toUpperCase() === title.toUpperCase()
   );
 
   // const eventsToDisplay = filteredEvents.length
@@ -107,30 +108,41 @@ function CalendarBox({
           </div>
         </div>
         <div className="h-96 overflow-auto bg-white py-2 space-y-2">
-          {displayedEvents.map((race, index) => (
-            <div
-              key={index}
-              className={`grid grid-cols-6 uppercase py-2 font-bold italic text-xl ${
-                index % 2 !== 0 ? "bg-white" : "bg-gray-200"
-              }`}
-            >
-              <p className="truncate pl-10 ">{race.MONTH}</p>
-              <p className="truncate ">{race.DAY}</p>
-              <p className="truncate pr-10">{race.NAME}</p>
-              <p className="truncate pr-10">{race.PLACE}</p>
-              <p className="truncate pr-10">{race.DISTANCE}</p>
-              <p className="truncate pr-10">
-                <a
-                  href={race.LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`text-${color} truncate underline`}
-                >
-                  {race.LINK}
-                </a>
+          {displayedEvents.length ? (
+            displayedEvents.map((race, index) => (
+              <div
+                key={index}
+                className={`grid grid-cols-6 uppercase py-2 font-bold italic text-xl ${
+                  index % 2 !== 0 ? "bg-white" : "bg-gray-200"
+                }`}
+              >
+                <p className="truncate pl-10 ">{race.MONTH}</p>
+                <p className="truncate ">{race.DAY}</p>
+                <p className="truncate pr-10">{race.NAME}</p>
+                <p className="truncate pr-10">{race.PLACE}</p>
+                <p className="truncate pr-10">{race.DISTANCE}</p>
+                <p className="truncate pr-10">
+                  <a
+                    href={race.LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-${color} truncate underline`}
+                  >
+                    {race.LINK}
+                  </a>
+                </p>
+              </div>
+            ))
+          ) : (
+            <div className="h-full flex flex-col justify-center">
+              <p className="text-3xl font-bold text-center ">
+                No hay carreras para mostrar
+              </p>
+              <p className="text-2xl italic font-thin text-center">
+                Por favor, intenta con otro mes
               </p>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
