@@ -148,12 +148,11 @@ function Calendar() {
         </div>
         <div>
           <p
-            className="underline text-xl font-bold hover:cursor-pointer"
+            className="underline text-xl font-bold hover:cursor-pointer w-fit"
             onClick={handleClearFilters}
           >
             Limpiar filtros
           </p>
-          <p>{filters.month}</p>
         </div>
       </div>
 
