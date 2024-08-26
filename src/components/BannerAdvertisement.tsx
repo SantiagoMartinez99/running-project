@@ -15,20 +15,20 @@ function BannerAdvertisement() {
         </div>
 
         <div className="flex z-10 mx-20  items-center justify-around">
-          <div className="w-3/5">
+          <div>
             <h1 className="mb-5 text-4xl md:text-9xl font-extrabold text-secondary italic">
               ¡ANUNCIA TU EVENTO AQUÍ!
             </h1>
-            <p className="mb-5 text-secondary italic text-xl font-bold">
+            <p className="mb-5 text-secondary italic text-sm md:text-2xl font-bold">
               Únete a nosotros, haremos historia juntos. Estamos emocionados de
               invitar a todos los interesados a colaborar en nuestro próximo
               evento.
             </p>
-            <button className="btn btn-secondary italic text-white">
+            <button className="bg-secondary btn-secondary italic text-white flex  p-5 text-2xl rounded-lg font-bold">
               CONTACTAR
             </button>
           </div>
-          <div className="flex flex-col ">
+          <div className=" flex-col hidden lg:flex">
             <img
               src={BannerOrchid}
               alt="Banner Image Orchid"

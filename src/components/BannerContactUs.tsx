@@ -7,7 +7,7 @@ function BannerContactUs() {
         src={Orchid}
       ></img>
 
-      <div className="flex w-full lg:justify-end px-14 mt-20">
+      <div className="flex w-full lg:justify-end px-14 my-20">
         <span>
           <h1 className=" text-5xl md:text-8xl font-bold text-accent italic mt-10">
             CONTACTANOS
@@ -18,14 +18,14 @@ function BannerContactUs() {
 
       <div className="px-14 w-full mb-10">
         <div className="flex mt-10 justify-end">
-          <p className="w-4/5 mb-5 text-secondary italic text-lg text-right">
+          <p className="w-4/5 mb-10 text-secondary italic text-3xl text-right">
             ¡Únete a nuestro equipo de promoción y ayuda a llevar tu próxima
             carrera o negocio a lo más alto! Completa este formulario para ser
             parte del equipo y ayudar a difundir esta emocionante experiencia.
           </p>
         </div>
         <div className="flex justify-end">
-          <button className="btn btn-secondary italic text-white flex">
+          <button className=" bg-secondary btn-secondary italic text-white flex  p-5 text-2xl rounded-lg font-bold">
             CONTACTAR
           </button>
         </div>

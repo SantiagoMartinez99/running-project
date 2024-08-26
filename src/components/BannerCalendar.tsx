@@ -85,7 +85,7 @@ function BannerCalendar() {
           <img
             src={WaveBackgroundImg}
             alt="wave Background Image"
-            className="absolute translate-x-16 translate-y-36 -z-10 w-full"
+            className="absolute translate-x-16 translate-y-36 -z-10 w-full "
           ></img>
         </div>
 
@@ -93,9 +93,9 @@ function BannerCalendar() {
           <img
             src={NextRacesImg}
             alt="Next Races"
-            className="absolute translate-x-40 -translate-y-36"
+            className="absolute translate-x-40 -translate-y-36 hidden md:visible"
           ></img>
-          <div className=" justify-center w-full my-24 mx-40">
+          <div className=" justify-center w-full my-24 md:mx-40">
             <div className="lg:flex justify-around">
               <RaceBox color={"secondary"} type={"calle"} />
               <RaceBox color={"accent"} type={"trail"} />
@@ -104,9 +104,9 @@ function BannerCalendar() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-16">
         <Link to={"/calendar"}>
-          <button className="bg-neutral italic text-white text-center -translate-y-10 text-lg p-5 rounded-lg">
+          <button className="bg-neutral italic text-white text-center -translate-y-10 text-2xl p-5 rounded-lg font-bold">
             VER TODAS LAS CARRERAS
           </button>
         </Link>
