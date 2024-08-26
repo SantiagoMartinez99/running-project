@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-import BannerCalendarSvg from "../assets/banners/BannerCalendar2.png";
+import NextRacesImg from "../assets/images/nextRacesImage.svg";
 import RaceBox from "./RaceBox";
-
-
-
+import WaveBackgroundImg from "../assets/images/Vector 57 (1).svg";
 
 // const eventsData = [
 //   {
@@ -71,16 +69,9 @@ import RaceBox from "./RaceBox";
 //   },
 // ];
 function BannerCalendar() {
- 
-
   return (
     <>
-      <div
-        className="flex-col bg-cover bg-no-repeat mt-20 py-10 items-center"
-        style={{
-          backgroundImage: `url(${BannerCalendarSvg})`,
-        }}
-      >
+      <div className="flex-col mt-20 py-10 items-center">
         <div className="flex w-full lg:justify-end px-14">
           <span>
             <h1 className=" text-6xl md:text-8xl font-bold text-secondary">
@@ -91,12 +82,25 @@ function BannerCalendar() {
             </h1>
             <span className="w-3/4 h-1 bg-accent flex md:-translate-y-4 xl:translate-x-28"></span>
           </span>
+          <img
+            src={WaveBackgroundImg}
+            alt="wave Background Image"
+            className="absolute translate-x-16 translate-y-36 -z-10 w-full"
+          ></img>
         </div>
-        <div className="flex w-full my-24 justify-center">
-          <div className="lg:flex justify-around">
-            <RaceBox color={"secondary"} type={"calle"} />
-            <RaceBox color={"accent"} type={"trail"} />
-            <RaceBox color={"neutral"} type={"triatlón"} />
+
+        <div className="flex">
+          <img
+            src={NextRacesImg}
+            alt="Next Races"
+            className="absolute translate-x-40 -translate-y-36"
+          ></img>
+          <div className=" justify-center w-full my-24 mx-40">
+            <div className="lg:flex justify-around">
+              <RaceBox color={"secondary"} type={"calle"} />
+              <RaceBox color={"accent"} type={"trail"} />
+              <RaceBox color={"neutral"} type={"triatlón"} />
+            </div>
           </div>
         </div>
       </div>
