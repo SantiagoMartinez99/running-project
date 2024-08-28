@@ -12,7 +12,9 @@
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
     "firebase": "^10.12.4",
+    "formik": "^2.4.6",
     "react-router-dom": "^6.24.0",
+    "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

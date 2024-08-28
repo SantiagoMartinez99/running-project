@@ -3,7 +3,7 @@ function BannerContactUs() {
   return (
     <>
       <img
-        className="background-image absolute left-0 w-50 h-96 bg-cover bg-center -translate-y-8"
+        className="background-image absolute left-0 w-50 h-96 bg-cover bg-center -z-10 opacity-60"
         src={Orchid}
       ></img>
 
@@ -17,15 +17,15 @@ function BannerContactUs() {
       </div>
 
       <div className="px-14 w-full mb-10">
-        <div className="flex mt-10 justify-end">
-          <p className="w-4/5 mb-10 text-secondary italic text-3xl text-right">
+        <div className="flex justify-center md:justify-end">
+          <p className="w-4/5 mb-10 text-secondary italic text-3xl md:text-right">
             ¡Únete a nuestro equipo de promoción y ayuda a llevar tu próxima
             carrera o negocio a lo más alto! Completa este formulario para ser
             parte del equipo y ayudar a difundir esta emocionante experiencia.
           </p>
         </div>
-        <div className="flex justify-end">
-          <button className=" bg-secondary btn-secondary italic text-white flex  p-5 text-2xl rounded-lg font-bold">
+        <div className="flex justify-center md:justify-end">
+          <button className="bg-secondary btn-secondary italic text-white flex  p-5 text-2xl rounded-lg font-bold">
             CONTACTAR
           </button>
         </div>

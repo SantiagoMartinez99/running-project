@@ -85,7 +85,7 @@ function BannerCalendar() {
           <img
             src={WaveBackgroundImg}
             alt="wave Background Image"
-            className="absolute translate-x-16 translate-y-36 -z-10 w-full "
+            className="absolute translate-x-16 translate-y-36 -z-10 w-full"
           ></img>
         </div>
 

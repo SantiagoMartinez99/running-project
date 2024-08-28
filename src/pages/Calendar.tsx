@@ -6,7 +6,6 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { getMonth } from "../utils/globalFunctions";
-
 type Event = {
   id?: string;
   DAY: number;
@@ -22,8 +21,9 @@ function Calendar() {
   const [events, setEvents] = useState<Event[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const currentMonth: string = getMonth();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [filters, setFilters] = useState({
-    month: "",
+    month: currentMonth,
     distance: "",
   });
 
@@ -37,7 +37,7 @@ function Calendar() {
 
   const handleClearFilters = () => {
     setFilters({
-      month: currentMonth,
+      month: "",
       distance: "",
     });
   };
@@ -50,6 +50,7 @@ function Calendar() {
       );
       eventsArray.sort((a, b) => a.DAY - b.DAY);
       setEvents(eventsArray);
+      setIsLoading(false);
     };
     fetchEvents();
     console.log(events);
@@ -58,7 +59,7 @@ function Calendar() {
   useEffect(() => {
     const filtered = events.filter((event) => {
       const monthMatch = filters.month
-        ? event.MONTH.toLocaleUpperCase() === filters.month
+        ? event.MONTH.toLocaleLowerCase() === filters.month
         : true;
       const distanceMatch = filters.distance
         ? event.DISTANCE === filters.distance
@@ -161,12 +162,14 @@ function Calendar() {
         color={"neutral"}
         orientation={"left"}
         filteredEvents={filteredEvents}
+        isLoading={isLoading}
       />
       <CalendarBox
         title={"TRAIL"}
         color={"primary"}
         orientation={"right"}
         filteredEvents={filteredEvents}
+        isLoading={isLoading}
       />
       {/* <CalendarBox title={"TRIATLÓN"} color={"accent"} orientation={"left"} /> */}
       <Footer />
