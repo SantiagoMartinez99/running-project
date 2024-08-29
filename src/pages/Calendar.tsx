@@ -1,20 +1,25 @@
-import CalendarBox from "../components/CalendarBox";
 import Header from "../components/Header";
 // import RouteMapImg from "../assets/calendar/routeMap.svg";
-import Footer from "../components/Footer";
-import { collection, getDocs } from "firebase/firestore";
+import firebase from "firebase/compat/app";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 import { db } from "../firebase";
 import { getMonth } from "../utils/globalFunctions";
+import CalendarBox from "../components/CalendarBox";
+
 type Event = {
   id?: string;
-  DAY: number;
+  DATE: firebase.firestore.Timestamp;
   DISTANCE: string;
   LINK: string;
-  MONTH: string;
   NAME: string;
   PLACE: string;
   RACETYPE: string;
+  LISTED: boolean;
+  DAY: number;
+  MONTH: string;
+  YEAR: number;
 };
 
 function Calendar() {
@@ -42,27 +47,65 @@ function Calendar() {
     });
   };
 
+  function getMonthName(monthIndex: number): string {
+    const months = [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+    return months[monthIndex] || "";
+  }
+
   useEffect(() => {
     const fetchEvents = async () => {
-      const querySnapshot = await getDocs(collection(db, "Races"));
-      const eventsArray = querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Event)
-      );
-      eventsArray.sort((a, b) => a.DAY - b.DAY);
+      // Consulta con ordenamiento por fecha
+      const q = query(collection(db, "Races"), orderBy("DATE"));
+      const querySnapshot = await getDocs(q);
+      const eventsArray = querySnapshot.docs.map((doc) => {
+        const data = doc.data() as Event;
+        const timestamp = data.DATE.toDate();
+        const day = timestamp.getDate();
+        const month = getMonthName(timestamp.getMonth());
+        const year = timestamp.getFullYear();
+
+        return {
+          id: doc.id,
+          DATE: data.DATE,
+          DISTANCE: data.DISTANCE,
+          LINK: data.LINK,
+          NAME: data.NAME,
+          PLACE: data.PLACE,
+          RACETYPE: data.RACETYPE,
+          LISTED: data.LISTED,
+          DAY: day,
+          MONTH: month,
+          YEAR: year,
+        };
+      });
+
       setEvents(eventsArray);
       setIsLoading(false);
     };
+
     fetchEvents();
-    console.log(events);
   }, []);
 
   useEffect(() => {
     const filtered = events.filter((event) => {
       const monthMatch = filters.month
-        ? event.MONTH.toLocaleLowerCase() === filters.month
+        ? event.MONTH.toUpperCase() === filters.month.toUpperCase()
         : true;
       const distanceMatch = filters.distance
-        ? event.DISTANCE === filters.distance
+        ? event.DISTANCE.toUpperCase() === filters.distance
         : true;
       return monthMatch && distanceMatch;
     });

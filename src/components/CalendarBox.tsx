@@ -1,4 +1,5 @@
 // import { getMonth } from "../utils/globalFunctions";
+import firebase from "firebase/compat/app";
 type CalendarBoxProps = {
   title: string;
   color: string;
@@ -9,13 +10,16 @@ type CalendarBoxProps = {
 
 type Event = {
   id?: string;
-  DAY: number;
+  DATE: firebase.firestore.Timestamp;
   DISTANCE: string;
   LINK: string;
-  MONTH: string;
   NAME: string;
   PLACE: string;
   RACETYPE: string;
+  LISTED: boolean;
+  DAY: number;
+  MONTH: string;
+  YEAR: number;
 };
 
 // const eventsData: Event[] = [
@@ -29,7 +33,6 @@ function CalendarBox({
   filteredEvents,
   isLoading,
 }: CalendarBoxProps) {
-
   const justifyContent =
     orientation === "left" ? "justify-start" : "justify-end";
 

@@ -8,12 +8,12 @@ import Header from "../components/Header.tsx";
 function Home() {
   return (
     <>
+      <FormInfo />
       <Header />
       <BannerAdvertisement />
       <BannerCalendar />
       <BannerFaq />
       <BannerContactUs />
-      <FormInfo />
 
       <Footer />
     </>

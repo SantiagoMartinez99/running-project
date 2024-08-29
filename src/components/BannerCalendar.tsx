@@ -93,7 +93,7 @@ function BannerCalendar() {
           <img
             src={NextRacesImg}
             alt="Next Races"
-            className="absolute translate-x-40 -translate-y-36 hidden md:visible"
+            className=" absolute translate-x-40 -translate-y-36 hidden md:block"
           ></img>
           <div className=" justify-center w-full my-24 md:mx-40">
             <div className="lg:flex justify-around">
