@@ -19,7 +19,7 @@ function BannerAdvertisement() {
             <h1 className="mb-5 text-4xl md:text-9xl font-extrabold text-secondary italic">
               ¡ANUNCIA TU EVENTO AQUÍ!
             </h1>
-            <p className="mb-5 text-secondary italic text-sm md:text-2xl font-bold">
+            <p className="mb-5 text-secondary italic text-md md:text-2xl font-bold">
               Únete a nosotros, haremos historia juntos. Estamos emocionados de
               invitar a todos los interesados a colaborar en nuestro próximo
               evento.
