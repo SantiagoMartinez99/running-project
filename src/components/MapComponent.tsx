@@ -5,51 +5,45 @@ import {
   InfoWindowF,
 } from "@react-google-maps/api";
 
-interface Marker {
-  id: number;
-  position: {
-    lat: number;
-    lng: number;
-  };
+// interface Marker {
+//   id: number;
+//   position: {
+//     lat: number;
+//     lng: number;
+//   };
+// }
+interface Track {
+  id?: string;
+  ADDRESS: string;
+  CITY: string;
+  LAT: string;
+  LON: string;
+  NAME: string;
+}
+
+interface MapProps {
+  tracks: Track[];
 }
 
 import { useState } from "react";
-const markers = [
-  {
-    id: 1,
-    name: "Parque Simón Bolívar",
-    position: { lat: 4.662982, lng: -74.098842 },
-  },
-  {
-    id: 2,
-    name: "Parque Nacional",
-    position: { lat: 4.605632, lng: -74.073573 },
-  },
-  {
-    id: 3,
-    name: "Parque de Usaquén",
-    position: { lat: 4.691252, lng: -74.030354 },
-  },
-];
 
-export default function MapComponent() {
+export default function MapComponent({ tracks }: MapProps) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.GOOGLE_MAPS_KEY,
   });
 
-  const [activeMarker, setActiveMarker] = useState(null);
+  const [activeMarker, setActiveMarker] = useState<string | null>(null);
 
-  const handleActiveMarker = (marker: Marker) => {
-    setActiveMarker((prevMarker) => {
-      if (marker.id === prevMarker) {
-        return null;
-      }
-      return null;
-    });
+ const handleActiveMarker = (track: Track) => {
+    if (track.NAME === activeMarker) {
+      setActiveMarker(null); 
+    } else {
+      setActiveMarker(track.NAME); 
+    }
   };
 
   return (
-    <div style={{ height: "70vh", width: "100%" }}>
+    <div className="w-1/2" style={{ height: "100%", width: "100%" }}>
       {isLoaded ? (
         <GoogleMap
           center={{ lat: 4.658888153423083, lng: -74.0953921801869 }}
@@ -57,19 +51,30 @@ export default function MapComponent() {
           onClick={() => setActiveMarker(null)}
           mapContainerStyle={{ width: "100%", height: "100%" }}
         >
-          {markers.map((marker) => (
-            <MarkerF
-              key={marker.id}
-              position={marker.position}
-              onClick={() => handleActiveMarker(marker)}
-            >
-              {activeMarker === marker.id ? (
-                <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                  <div className="text-black">{marker.name}</div>
-                </InfoWindowF>
-              ) : null}
-            </MarkerF>
-          ))}
+          {tracks.map((track) => {
+            const position = {
+              lat: parseFloat(track.LAT),
+              lng: parseFloat(track.LON),
+            };
+
+            return (
+              <MarkerF
+                key={track.NAME}
+                position={position}
+                onClick={() => handleActiveMarker(track)}
+              >
+                {activeMarker === track.NAME ? (
+                   <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
+                   <div className="text-black">
+                     <p className="italic">{track.NAME}</p>
+                     <p className="italic">{track.ADDRESS}</p>
+                     <p className="italic">{track.CITY}</p>
+                   </div>
+                 </InfoWindowF>
+                ) : null}
+              </MarkerF>
+            );
+          })}
         </GoogleMap>
       ) : null}
     </div>

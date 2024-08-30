@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { db } from "../firebase";
 import { getMonth } from "../utils/globalFunctions";
 import CalendarBox from "../components/CalendarBox";
+import FormInfo from "../components/FormInfo";
 
 type Event = {
   id?: string;
@@ -116,7 +117,7 @@ function Calendar() {
   return (
     <>
       <Header />
-
+      <FormInfo />
       <div className="flex flex-col w-full pl-14 my-10 justify-between gap-5">
         <h1>
           <span className=" text-5xl md:text-8xl font-bold text-secondary italic">

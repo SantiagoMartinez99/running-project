@@ -1,52 +1,78 @@
+import { collection, getDocs, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MapComponent from "../components/MapComponent";
+import { db } from "../firebase";
 
 function Tracks() {
-  const data = [
-    { name: "Pista 1", distancia: "1KM", ubicacion: "Bogotá D.C" },
-    { name: "Pista 2", distancia: "400m", ubicacion: "Bogotá D.C" },
-    { name: "Pista 3", distancia: "3.2KM", ubicacion: "Bogotá D.C" },
-    { name: "Pista 4", distancia: "3.2KM", ubicacion: "Bogotá D.C" },
-    { name: "Pista 5", distancia: "3.2KM", ubicacion: "Bogotá D.C" },
-    { name: "Pista 6", distancia: "3.2KM", ubicacion: "Bogotá D.C" },
-    { name: "Pista 7", distancia: "3.2KM", ubicacion: "Bogotá D.C" },
-    { name: "Pista 8", distancia: "3.2KM", ubicacion: "Bogotá D.C" },
-  ];
+  const [tracks, setTracks] = useState<Track[]>([]);
+
+  interface Track {
+    id?: string;
+    ADDRESS: string;
+    CITY: string;
+    LAT: string;
+    LON: string;
+    NAME: string;
+  }
+
+  useEffect(() => {
+    const fetchTracks = async () => {
+      const q = query(collection(db, "tracks"));
+      const querySnapshot = await getDocs(q);
+      const tracksArray = querySnapshot.docs.map((doc) => {
+        const data = doc.data() as Track;
+        return {
+          id: doc.id,
+          ADDRESS: data.ADDRESS,
+          CITY: data.CITY,
+          LAT: data.LAT,
+          LON: data.LON,
+          NAME: data.NAME,
+        };
+      });
+      setTracks(tracksArray);
+    };
+    fetchTracks();
+  }, []);
 
   return (
     <>
-      {" "}
       <Header />
       <div>
-        <div className="mx-14 py-10">
+        <div className="mx-14 py-10 ">
           <h1 className="text-5xl md:text-8xl font-bold text-secondary italic">
             PISTAS
           </h1>
           <span className="h-1 bg-accent flex"></span>
         </div>
 
-        <div className="grid grid-flow-col gap-4">
-          <div className="flex flex-col bg-primary text-white rounded-tr-xl overflow-scroll flex-grow">
-            <h1 className="border-b-2 border-white text-center p-5">
-              PISTAS EN BOGOTA
+        <div className="flex gap-20 mb-10 ">
+          <div className="flex flex-col  bg-primary text-white rounded-tr-xl w-1/2 ">
+            <h1 className="text-4xl font-bold italic border-b-2 border-white text-center p-5 h-20">
+              PISTAS EN BOGOTÁ
             </h1>
-            <div className="overflow-y-auto">
-              {data.map((track, index) => (
+            <div className="h-[40rem] overflow-auto">
+              {tracks.map((track, index) => (
                 <div
                   key={index}
                   className="border-b-2 border-white my-2 py-4 px-6"
                 >
-                  <h2>{track.name}</h2>
-                  <p>Distancia: {track.distancia}</p>
-                  <p>Ubicación: {track.ubicacion}</p>
+                  <h2 className="text-3xl">{track.NAME}</h2>
+                  <p className="text-xl italic text-gray-200">
+                    Ubicación: {track.ADDRESS}
+                  </p>
+                  <p className="text-xl italic text-gray-200">
+                    Ciudad: {track.CITY}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-accent text-white text-center p-5 rounded-md flex-grow flex  justify-center">
-            <MapComponent />
+          <div className="bg-accent text-white text-center p-5 rounded-md  justify-center w-1/2 ">
+            <MapComponent tracks={tracks} />
           </div>
         </div>
       </div>
