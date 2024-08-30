@@ -3,71 +3,6 @@ import NextRacesImg from "../assets/images/nextRacesImage.svg";
 import RaceBox from "./RaceBox";
 import WaveBackgroundImg from "../assets/images/Vector 57 (1).svg";
 
-// const eventsData = [
-//   {
-//     DAY: 1,
-//     DISTANCE: "2K, 5K, 10K, 15K",
-//     LINK: "https://www.crazyrunners.co/",
-//     MONTH: "Diciembre",
-//     NAME: "CRAZY RUNNERS 15K",
-//     PLACE: "Gran Malecón, Barranquilla",
-//     RACETYPE: "CALLE",
-//   },
-//   {
-//     DAY: 1,
-//     DISTANCE: "42K",
-//     LINK: "https://www.vchallenges.co/2024/challenge/details/vchallenges42k",
-//     MONTH: "Diciembre",
-//     NAME: "42K VCHALLENGES",
-//     PLACE: "Bogota",
-//     RACETYPE: "CALLE",
-//   },
-//   {
-//     DAY: 1,
-//     DISTANCE: "5K, 10K, 21K",
-//     LINK: "https://www.eventrid.com.co/eventos/prsports/media-maraton-manizales-mmm-2024",
-//     MONTH: "Diciembre",
-//     NAME: "MEDIA MARATON DE MANIZALES",
-//     PLACE: "Manizales",
-//     RACETYPE: "CALLE",
-//   },
-//   {
-//     DAY: 3,
-//     DISTANCE: "5K",
-//     LINK: "https://www.eventrid.com.co/eventos/fundacionjeisonaristizabal/maraton-de-suenos-2024",
-//     MONTH: "Diciembre",
-//     NAME: "MARATON DE SUEÑOS",
-//     PLACE: "Cali",
-//     RACETYPE: "CALLE",
-//   },
-//   {
-//     DAY: 15,
-//     DISTANCE: "5K, 10K",
-//     LINK: "https://grupomonte.com/eventos/carrera-internacional-rio-cali/",
-//     MONTH: "Diciembre",
-//     NAME: "CARRERA INTERNACIONAL RIO CALI",
-//     PLACE: "Cali",
-//     RACETYPE: "CALLE",
-//   },
-//   {
-//     DAY: 15,
-//     DISTANCE: "10K",
-//     LINK: "https://www.eventrid.com.co/eventos/10klamonumental/la-monumental-10k-2024",
-//     MONTH: "Diciembre",
-//     NAME: "LA MONUMENTAL 10K",
-//     PLACE: "Cienaga, Magdalena",
-//     RACETYPE: "CALLE",
-//   },
-//   {
-//     DAY: 28,
-//     DISTANCE: "5K, 10K",
-//     LINK: "https://www.2george.com.co/evento/carrera-san-silvestre-cartagena-2024",
-//     MONTH: "Diciembre",
-//     NAME: "CARRERA SAN SILVESTRE CARTAGENA",
-//     PLACE: "Cartagena",
-//     RACETYPE: "CALLE",
-//   },
-// ];
 function BannerCalendar() {
   return (
     <>
@@ -93,13 +28,13 @@ function BannerCalendar() {
           <img
             src={NextRacesImg}
             alt="Next Races"
-            className=" absolute translate-x-40 -translate-y-36 hidden md:block"
+            className=" absolute translate-x-60 -translate-y-36 hidden md:block"
           ></img>
-          <div className=" justify-center w-full my-24 md:mx-40">
+          <div className=" justify-center w-full my-24 md:mx-24">
             <div className="lg:flex justify-around">
               <RaceBox color={"secondary"} type={"calle"} />
               <RaceBox color={"accent"} type={"trail"} />
-              <RaceBox color={"neutral"} type={"triatlón"} />
+              {/* <RaceBox color={"neutral"} type={"triatlón"} /> */}
             </div>
           </div>
         </div>
