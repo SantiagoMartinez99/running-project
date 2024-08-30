@@ -29,3 +29,25 @@ export const getMonth = (): string => {
 //     console.error("Error al subir las pistas a Firestore: ", error);
 //   }
 // }
+
+//CODIGO PARA SUBIR EQUIPOS A FIREBASE
+// async function subirEquiposSinDuplicados() {
+//   for (const equipo of equipos) {
+//     const idDocumento = equipo.NAME.replace(/\s+/g, "_"); // Reemplazar espacios con guiones bajos
+//     const docRef = doc(db, "Teams", idDocumento); // Usar el ID modificado sin espacios
+//     const docSnap = await getDoc(docRef); // Verificar si el documento ya existe
+
+//     if (docSnap.exists()) {
+//       console.log(`El equipo ${equipo.NAME} ya existe en Firestore.`);
+//       Aquí puedes actualizar el documento si quieres, usando setDoc con la opción merge
+//       await setDoc(docRef, equipo, { merge: true });
+//     } else {
+//       try {
+//         await setDoc(docRef, equipo);
+//         console.log(`Equipo ${equipo.NAME} añadido a Firestore con ID ${idDocumento}.`);
+//       } catch (e) {
+//         console.error("Error añadiendo el equipo: ", e);
+//       }
+//     }
+//   }
+// }

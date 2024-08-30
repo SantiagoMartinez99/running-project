@@ -1,15 +1,20 @@
-import LogoCoRunning from "../assets/images/logo.png";
+type Team = {
+  id?: string;
+  NAME: string;
+  HEYLOURL: string;
+  INSTAGRAMURL: string;
+  IMAGE: string;
+};
 
-function TeamCard() {
-  const data = [
-    { name: "RUNNING TEAM1", instagram: "Runninteam", ubicacion: "Bogotá D.C" },
-    { name: "RUNNING TEAM2", instagram: "Runninteam", ubicacion: "Bogotá D.C" },
-    { name: "RUNNING TEAM3", instagram: "Runninteam", ubicacion: "Bogotá D.C" },
-  ];
+type TeamCardProps = {
+  teams: Team[];
+};
+
+function TeamCard({ teams }: TeamCardProps) {
   const colors = ["bg-primary", "bg-neutral", "bg-accent"];
   return (
     <div>
-      {data.map((team, index) => (
+      {teams.map((team, index) => (
         <div
           className={`flex ${
             index % 2 === 0 ? "justify-start" : "justify-end"
@@ -31,14 +36,22 @@ function TeamCard() {
               }`}
             >
               <img
-                className="h-20  w-28 md:w-36 rounded-sm"
-                src={LogoCoRunning}
+                className="h-20  w-20 md:w-20 rounded-sm"
+                src={team.IMAGE}
                 alt="logo"
               />
-              <div className={`ml-4 ${index % 2 !== 0 ? "text-right" : ""}`}>
-                <div className="text-4xl font-bold">{team.name}</div>
-                <div className="text-2xl">@{team.instagram}</div>
-                <div className="text-2xl">{team.ubicacion}</div>
+              <div
+                className={`ml-4 flex flex-col ${
+                  index % 2 !== 0 ? "text-right" : ""
+                }`}
+              >
+                <p className="text-4xl font-bold">{team.NAME}</p>
+                <a className="text-2xl underline" href={`${team.INSTAGRAMURL}`}>
+                  Instagram
+                </a>
+                <a className="text-2xl underline" href={`${team.HEYLOURL}`}>
+                  Heylo
+                </a>
               </div>
             </div>
           </div>
