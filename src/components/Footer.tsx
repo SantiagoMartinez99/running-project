@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="footer footer-center p-4 bg-orange-100 text-base-content">
+    <footer className="footer footer-center p-4 bg-orange-100 text-base-content absolute bottom-0">
       <p className="text-secondary italic font-bold">
         Copyright © 2024 - All right reserved by CoRunning
       </p>
