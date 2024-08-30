@@ -19,16 +19,22 @@ function TeamCard() {
           <div
             className={`${
               colors[index % colors.length]
-            } w-5/6 p-10 text-white italic ${
-              index % 2 !== 0 ? "rounded-bl-full" : "rounded-br-full"
+            } w-11/12 md:w-5/6  p-5 md:p-10 text-white italic ${
+              index % 2 !== 0
+                ? "rounded-l-xl md:rounded-bl-full"
+                : " rounded-r-xl md:rounded-br-full"
             }`}
           >
             <div
-              className={`flex items-center gap-10 ${
-                index % 2 !== 0 ? "flex-row-reverse" : ""
+              className={`flex items-center gap-8 md:gap-10 ${
+                index % 2 !== 0 ? "flex-row-reverse " : ""
               }`}
             >
-              <img className="h-20 w-40" src={LogoCoRunning} alt="logo" />
+              <img
+                className="h-20  w-28 md:w-36 rounded-sm"
+                src={LogoCoRunning}
+                alt="logo"
+              />
               <div className={`ml-4 ${index % 2 !== 0 ? "text-right" : ""}`}>
                 <div className="text-4xl font-bold">{team.name}</div>
                 <div className="text-2xl">@{team.instagram}</div>

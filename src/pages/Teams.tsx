@@ -6,7 +6,7 @@ function Teams() {
   return (
     <>
       <Header />
-      <div className="mx-14 my-10 w-fit">
+      <div className="mx-5 md:mx-14 my-10 w-fit">
         <h1 className=" text-5xl md:text-8xl font-bold text-secondary italic">
           EQUIPOS
         </h1>

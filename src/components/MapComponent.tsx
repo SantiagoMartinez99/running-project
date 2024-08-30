@@ -5,13 +5,6 @@ import {
   InfoWindowF,
 } from "@react-google-maps/api";
 
-// interface Marker {
-//   id: number;
-//   position: {
-//     lat: number;
-//     lng: number;
-//   };
-// }
 interface Track {
   id?: string;
   ADDRESS: string;
@@ -34,11 +27,11 @@ export default function MapComponent({ tracks }: MapProps) {
 
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
 
- const handleActiveMarker = (track: Track) => {
+  const handleActiveMarker = (track: Track) => {
     if (track.NAME === activeMarker) {
-      setActiveMarker(null); 
+      setActiveMarker(null);
     } else {
-      setActiveMarker(track.NAME); 
+      setActiveMarker(track.NAME);
     }
   };
 
@@ -64,13 +57,13 @@ export default function MapComponent({ tracks }: MapProps) {
                 onClick={() => handleActiveMarker(track)}
               >
                 {activeMarker === track.NAME ? (
-                   <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                   <div className="text-black">
-                     <p className="italic">{track.NAME}</p>
-                     <p className="italic">{track.ADDRESS}</p>
-                     <p className="italic">{track.CITY}</p>
-                   </div>
-                 </InfoWindowF>
+                  <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
+                    <div className="text-black">
+                      <p className="italic">{track.NAME}</p>
+                      <p className="italic">{track.ADDRESS}</p>
+                      <p className="italic">{track.CITY}</p>
+                    </div>
+                  </InfoWindowF>
                 ) : null}
               </MarkerF>
             );
