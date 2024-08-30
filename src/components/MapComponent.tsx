@@ -22,7 +22,7 @@ import { useState } from "react";
 
 export default function MapComponent({ tracks }: MapProps) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: import.meta.env.GOOGLE_MAPS_KEY,
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_KEY,
   });
 
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
