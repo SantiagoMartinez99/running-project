@@ -68,7 +68,6 @@ function Calendar() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      // Consulta con ordenamiento por fecha
       const q = query(collection(db, "Races"), orderBy("DATE"));
       const querySnapshot = await getDocs(q);
       const eventsArray = querySnapshot.docs.map((doc) => {
@@ -117,7 +116,6 @@ function Calendar() {
   return (
     <>
       <Header />
-      <FormInfo />
       <div className="flex flex-col w-full pl-14 my-10 justify-between gap-5">
         <h1>
           <span className=" text-5xl md:text-8xl font-bold text-secondary italic">
@@ -200,7 +198,7 @@ function Calendar() {
           </p>
         </div>
       </div>
-
+      <FormInfo />
       <CalendarBox
         title={"CALLE"}
         color={"neutral"}

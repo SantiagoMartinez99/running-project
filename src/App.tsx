@@ -1,8 +1,9 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Calendar from "./pages/Calendar";
 import Home from "./pages/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Teams from "./pages/Teams";
 import Tracks from "./pages/Tracks";
+
 function App() {
   return (
     <>

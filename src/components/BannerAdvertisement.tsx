@@ -1,8 +1,12 @@
-import WaveBannerBackground from "../assets/images/WaveBackground.svg";
 import BannerImage from "../assets/images/imageBanner.svg";
 import BannerOrchid from "../assets/images/OrchidBanner.svg";
+import WaveBannerBackground from "../assets/images/WaveBackground.svg";
+
 
 function BannerAdvertisement() {
+  // const modal = useAppSelector((state: RootState) => state.isOpen.value);
+  // const dispatch = useAppDispatch();
+
   return (
     <>
       <div className="relative bg-orange-100 py-16 xl:py-16 mb-10">
@@ -24,7 +28,10 @@ function BannerAdvertisement() {
               invitar a todos los interesados a colaborar en nuestro próximo
               evento.
             </p>
-            <button className="bg-secondary btn-secondary italic text-white flex  p-5 text-2xl rounded-lg font-bold">
+            <button
+              className="bg-secondary btn-secondary italic text-white flex  p-5 text-2xl rounded-lg font-bold"
+              // onClick={() => dispatch(openModal())}
+            >
               CONTACTAR
             </button>
           </div>
