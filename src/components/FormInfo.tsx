@@ -33,6 +33,14 @@ function FormInfo() {
         then: (schema) => schema.required("El tipo de carrera es requerido"),
         otherwise: (schema) => schema.nullable(),
       }),
+    raceName: Yup.string()
+      .nullable()
+      .when("formType", {
+        is: "registerRace",
+        then: (schema) =>
+          schema.required("El nombre de la carrera es requerido"),
+        otherwise: (schema) => schema.nullable(),
+      }),
     raceDate: Yup.date()
       .nullable()
       .when("formType", {
@@ -43,8 +51,7 @@ function FormInfo() {
     distance: Yup.string()
       .nullable()
       .when("formType", {
-        is: (value: string) =>
-          value === "registerRace" || value === "trackSignUp",
+        is: "registerRace",
         then: (schema) => schema.required("La distancia es requerida"),
         otherwise: (schema) => schema.nullable(),
       }),
@@ -111,43 +118,32 @@ function FormInfo() {
 
   return (
     <>
-      <button
-        className="btn fixed text-md bottom-5 left-5 btn-primary uppercase text-white z-10 block h-16 w-48 font-thin italic"
-        onClick={() => dispatch(openModal())}
-      >
-        <p>¿Tienes información de una carrera?</p>
-        <p className="block">¡Compártela aquí!</p>
-      </button>
-      <img
-        className=" fixed h-52 w-52 z-10 bottom-20 left-5"
-        src={HelpUsImg}
-      ></img>
       {isOpen ? (
         <div
           id="myModal"
-          className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center"
+          className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
         >
-          <div className="bg-white rounded-lg shadow-lg w-1/3 max-w-sm p-6">
-            <h2 className="text-xl font-semibold mb-2">Título del Modal</h2>
-            <p className="mb-2">
+          <div className="relative bg-white rounded-lg shadow-lg w-3/5 max-w-md p-6 max-h-sm">
+            <button
+              id="closeModalBtn"
+              className="px-2 bg-red-500 text-white rounded-3xl hover:bg-red-600 absolute top-2 right-2 "
+              onClick={() => dispatch(closeModal())}
+            >
+              X
+            </button>
+            <h2 className="text-2xl font-semibold my-2">Ayudanos a mejorar</h2>
+            <p className="text-md">
               ¿Te gustaría compartir información, registrar una carrera o
               inscribir a tu equipo? Completa el siguiente formulario para que
               tu información sea publicada.
             </p>
-
-            <button
-              id="closeModalBtn"
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              onClick={() => dispatch(closeModal())}
-            >
-              Cerrar Modal
-            </button>
             <div className="w-full">
               <Formik
                 initialValues={{
                   name: "",
                   formType: "",
                   raceType: "",
+                  raceName: "",
                   raceDate: "",
                   distance: "",
                   registerLink: "",
@@ -168,7 +164,7 @@ function FormInfo() {
                 }}
               >
                 {({ isSubmitting, setFieldValue, values }) => (
-                  <Form className="bg-white w-full pt-6 pb-8 mb-4">
+                  <Form className="bg-white w-full pt-4 mb-4">
                     <div className="mb-4">
                       <label
                         className="block text-gray-700 text-sm font-bold mb-2"
@@ -200,7 +196,7 @@ function FormInfo() {
                       <Field
                         as="select"
                         name="formType"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                       >
                         <option
                           value=""
@@ -221,6 +217,26 @@ function FormInfo() {
 
                     {values.formType === "registerRace" && (
                       <>
+                        <div className="mb-4">
+                          <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="raceName"
+                          >
+                            Nombre de la Carrera
+                          </label>
+                          <Field
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="raceName"
+                            name="raceName"
+                            type="text"
+                            placeholder="Ingresa el nombre de la carrera"
+                          />
+                          <ErrorMessage
+                            name="raceName"
+                            component="div"
+                            className="text-red-500 text-xs italic"
+                          />
+                        </div>
                         <div className="mb-4">
                           <label
                             className="block text-gray-700 text-sm font-bold mb-2"
@@ -483,7 +499,21 @@ function FormInfo() {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <>
+          <button
+            className="btn fixed text-md bottom-5 left-5 btn-primary uppercase text-white z-10 block h-16 w-60 font-thin italic"
+            onClick={() => dispatch(openModal())}
+          >
+            <p>¿Tienes información de una carrera?</p>
+            <p className="block">¡Compártela aquí!</p>
+          </button>
+          <img
+            className=" fixed h-52 w-52 z-10 bottom-20 left-5"
+            src={HelpUsImg}
+          ></img>
+        </>
+      )}
     </>
   );
 }
