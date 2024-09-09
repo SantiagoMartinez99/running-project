@@ -1,3 +1,5 @@
+import InstagramIcon from "../assets/icons/icons8-instagram.svg";
+import DialogIcon from "../assets/icons/icons8-burbuja-de-diálogo.svg";
 type Team = {
   id?: string;
   NAME: string;
@@ -46,10 +48,27 @@ function TeamCard({ teams }: TeamCardProps) {
                 }`}
               >
                 <p className="text-4xl font-bold">{team.NAME}</p>
-                <a className="text-2xl underline" href={`${team.INSTAGRAMURL}`}>
+                <a
+                  className="text-2xl underline inline-flex"
+                  href={`${team.INSTAGRAMURL}`}
+                >
+                  <img
+                    className="h-10 mr-2"
+                    src={InstagramIcon}
+                    alt="Instagram Icon"
+                  />
                   Instagram
                 </a>
-                <a className="text-2xl underline" href={`${team.HEYLOURL}`}>
+
+                <a
+                  className="text-2xl underline inline-flex"
+                  href={`${team.HEYLOURL}`}
+                >
+                  <img
+                    className="h-10 mr-2"
+                    src={DialogIcon}
+                    alt="Instagram Icon"
+                  />
                   Heylo
                 </a>
               </div>

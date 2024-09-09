@@ -8,6 +8,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import TeamCard from "../components/TeamCard";
 import { db } from "../firebase";
+import InstagramIcon from "../assets/icons/icons8-instagram.svg";
+import DialogIcon from "../assets/icons/icons8-burbuja-de-diálogo.svg";
 
 interface Team {
   id?: string;
