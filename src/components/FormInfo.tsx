@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal, closeModal } from "../redux/features/modalSlice";
 import { RootState } from "../redux/store";
 import { useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
 function FormInfo() {
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);
@@ -115,6 +116,34 @@ function FormInfo() {
   useEffect(() => {
     console.log(isOpen);
   }, [isOpen]);
+  const handleSubmit = (
+    values: Record<string, unknown> | undefined,
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) => {
+    emailjs
+      .send(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        values,
+        {
+          publicKey: import.meta.env.VITE_PUBLIC_KEY,
+        }
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          alert("Formulario enviado exitosamente!");
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          alert("Error al enviar el formulario");
+        }
+      )
+      .finally(() => {
+        setSubmitting(false);
+        dispatch(closeModal());
+      });
+  };
 
   return (
     <>
@@ -155,13 +184,7 @@ function FormInfo() {
                   additionalComments: "",
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                    dispatch(closeModal());
-                  }, 400);
-                }}
+                onSubmit={handleSubmit}
               >
                 {({ isSubmitting, setFieldValue, values }) => (
                   <Form className="bg-white w-full pt-4 mb-4">
