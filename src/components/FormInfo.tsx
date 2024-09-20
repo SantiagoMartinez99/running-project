@@ -120,29 +120,71 @@ function FormInfo() {
     values: Record<string, unknown> | undefined,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
-    emailjs
-      .send(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        values,
-        {
-          publicKey: import.meta.env.VITE_PUBLIC_KEY,
-        }
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Formulario enviado exitosamente!");
-        },
-        (err) => {
-          console.log("FAILED...", err);
-          alert("Error al enviar el formulario");
-        }
-      )
-      .finally(() => {
-        setSubmitting(false);
-        dispatch(closeModal());
-      });
+    // Si hay una imagen, convertirla a base64
+    if (values?.imageFile) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result;
+
+        // Agregar la imagen en base64 a los valores a enviar
+        const formValuesWithImage = {
+          ...values,
+          imageFile: base64Image, // Usar la imagen en base64
+        };
+
+        emailjs
+          .send(
+            import.meta.env.VITE_SERVICE_ID,
+            import.meta.env.VITE_TEMPLATE_ID,
+            formValuesWithImage,
+            {
+              publicKey: import.meta.env.VITE_PUBLIC_KEY,
+            }
+          )
+          .then(
+            (response) => {
+              console.log("SUCCESS!", response.status, response.text);
+              alert("Formulario enviado exitosamente!");
+            },
+            (err) => {
+              console.log("FAILED...", err);
+              alert("Error al enviar el formulario");
+            }
+          )
+          .finally(() => {
+            setSubmitting(false);
+            dispatch(closeModal());
+          });
+      };
+
+      reader.readAsDataURL(values?.imageFile as Blob); // Convierte la imagen a base64
+    } else {
+      // Si no hay imagen, enviar los valores sin el archivo
+      emailjs
+        .send(
+          import.meta.env.VITE_SERVICE_ID,
+          import.meta.env.VITE_TEMPLATE_ID,
+          values,
+          {
+            publicKey: import.meta.env.VITE_PUBLIC_KEY,
+          }
+        )
+        .then(
+          (response) => {
+            console.log("SUCCESS!", response.status, response.text);
+            alert("Formulario enviado exitosamente!");
+          },
+          (err) => {
+            console.log("FAILED...", err);
+            alert("Error al enviar el formulario");
+          }
+        )
+        .finally(() => {
+          setSubmitting(false);
+          dispatch(closeModal());
+        });
+    }
   };
 
   return (
