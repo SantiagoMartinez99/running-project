@@ -3,7 +3,7 @@ import FaqElipseImg from "../assets/images/Ellipse 66.svg";
 function BannerFaq() {
   return (
     <>
-      <div className="mx-20 ">
+      <div className="mx-20">
         <h1 className=" text-5xl md:text-8xl font-bold text-secondary italic">
           FAQ
         </h1>
@@ -15,7 +15,7 @@ function BannerFaq() {
         ></img>
       </div>
 
-      <div className="mx-16 my-10">
+      <div className="mx-16 py-10">
         <FaqSlider
           question={"¿Como puedo subir la información de una carrera?"}
           answer={
