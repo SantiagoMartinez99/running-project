@@ -8,6 +8,7 @@ import { db } from "../firebase";
 interface Team {
   id?: string;
   NAME: string;
+  CITIES: Array<string>;
   HEYLOURL: string;
   INSTAGRAMURL: string;
   IMAGE: string;
@@ -24,6 +25,7 @@ function Teams() {
         return {
           id: doc.id,
           NAME: data.NAME,
+          CITIES:data.CITIES,
           INSTAGRAMURL: data.INSTAGRAMURL,
           HEYLOURL: data.HEYLOURL,
           IMAGE: data.IMAGE,

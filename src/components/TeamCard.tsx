@@ -3,6 +3,7 @@ import DialogIcon from "../assets/icons/icons8-burbuja-de-diálogo.svg";
 type Team = {
   id?: string;
   NAME: string;
+  CITIES: Array<string>;
   HEYLOURL: string;
   INSTAGRAMURL: string;
   IMAGE: string;
@@ -48,6 +49,8 @@ function TeamCard({ teams }: TeamCardProps) {
                 }`}
               >
                 <p className="text-4xl font-bold">{team.NAME}</p>
+                <p className="text-2xl underline inline-flex pb-3">{team.CITIES}</p>
+
                 <a
                   className="text-2xl underline inline-flex"
                   href={`${team.INSTAGRAMURL}`}
