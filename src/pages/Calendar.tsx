@@ -111,7 +111,7 @@ function Calendar() {
     });
     setFilteredEvents(filtered);
     console.log(filteredEvents);
-  }, [events, filters]);
+  }, [events, filteredEvents, filters]);
 
   return (
     <>

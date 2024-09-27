@@ -18,5 +18,4 @@ function FaqSlider({question,answer}:FaqSliderProps) {
   </div>
   )
 }
-
 export default FaqSlider

@@ -2,6 +2,13 @@ export const getMonth = (): string => {
   return new Date().toLocaleString("default", { month: "long" }).toUpperCase();
 };
 
+export function getMonthName(monthIndex: number): string {
+  const months = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+    "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+  return months[monthIndex] || '';
+}
 
 
 //CODIGO PARA SUBIR CARRERAS A FIREBASE
